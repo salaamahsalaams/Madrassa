@@ -7,6 +7,8 @@
   // ========== NAVIGATION ==========
   document.querySelectorAll('.nav-btn').forEach(btn => {
     btn.addEventListener('click', () => {
+      if (btn.classList.contains('active')) return;
+      stopAudio();
       document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.mode-section').forEach(s => s.classList.remove('active'));
       btn.classList.add('active');
@@ -643,6 +645,222 @@
     }
   }
 
+  // ========== LISTEN & RECALL ==========
+  let recallMode = 'beginning';
+  let recallRange = [1, 50];
+  let recallAyahList = [];
+  let recallIdx = 0;
+  let recallResults = [];
+  let recallCurrentMode = 'beginning';
+  let recallHiddenStart = 0;
+  let recallHiddenEnd = 0;
+  let recallPauseRatio = 0;
+
+  function initRecall() {
+    document.querySelectorAll('.recall-mode-selector .toggle-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.recall-mode-selector .toggle-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        recallMode = btn.dataset.recall;
+        resetRecall();
+      });
+    });
+
+    document.getElementById('recallRangeSelect').addEventListener('change', e => {
+      recallRange = e.target.value.split('-').map(Number);
+      resetRecall();
+    });
+
+    document.getElementById('recallRestartBtn').addEventListener('click', resetRecall);
+    document.getElementById('recallPlayBtn').addEventListener('click', startRecallRound);
+    document.getElementById('recallRevealBtn').addEventListener('click', revealRecall);
+    document.getElementById('recallGotItBtn').addEventListener('click', () => rateRecall(true));
+    document.getElementById('recallMissedBtn').addEventListener('click', () => rateRecall(false));
+
+    resetRecall();
+  }
+
+  function resetRecall() {
+    stopAudio();
+    const [start, end] = recallRange;
+    recallAyahList = [];
+    for (let i = start; i <= end; i++) recallAyahList.push(i);
+    recallIdx = 0;
+    recallResults = [];
+    renderRecallProgress();
+    loadRecallAyah();
+  }
+
+  function loadRecallAyah() {
+    if (recallIdx >= recallAyahList.length) {
+      const correct = recallResults.filter(Boolean).length;
+      const total = recallResults.length;
+      const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
+      showResults(
+        pct >= 80 ? 'Excellent!' : pct >= 50 ? 'Good Effort!' : 'Keep Practicing!',
+        pct,
+        'You recalled ' + correct + ' out of ' + total + ' ayahs correctly.'
+      );
+      resetRecall();
+      return;
+    }
+
+    const ayahNum = recallAyahList[recallIdx];
+    const ayah = ayahs[ayahNum - 1];
+    const n = ayah.words.length;
+
+    recallCurrentMode = recallMode === 'mix'
+      ? ['beginning', 'ending', 'middle'][Math.floor(Math.random() * 3)]
+      : recallMode;
+
+    if (n <= 2 && recallCurrentMode === 'middle') {
+      recallCurrentMode = Math.random() < 0.5 ? 'beginning' : 'ending';
+    }
+
+    if (recallCurrentMode === 'beginning') {
+      var hide = Math.max(1, Math.ceil(n * 0.4));
+      recallHiddenStart = 0;
+      recallHiddenEnd = hide - 1;
+      recallPauseRatio = 0;
+    } else if (recallCurrentMode === 'ending') {
+      var hide = Math.max(1, Math.ceil(n * 0.4));
+      recallHiddenStart = n - hide;
+      recallHiddenEnd = n - 1;
+      recallPauseRatio = recallHiddenStart / n;
+    } else {
+      var sStart = Math.max(1, Math.floor(n * 0.3));
+      var sEnd = Math.max(1, Math.floor(n * 0.3));
+      recallHiddenStart = sStart;
+      recallHiddenEnd = Math.max(sStart, n - sEnd - 1);
+      recallPauseRatio = recallHiddenStart / n;
+    }
+
+    document.getElementById('recallAyahNum').textContent = ayahNum;
+
+    var labels = { beginning: 'Recall the beginning', ending: 'Recall the ending', middle: 'Recall the middle' };
+    document.getElementById('recallModeLabel').textContent = labels[recallCurrentMode];
+
+    var arabicEl = document.getElementById('recallArabic');
+    arabicEl.innerHTML = ayah.words.map(function (w, i) {
+      if (i >= recallHiddenStart && i <= recallHiddenEnd) {
+        return '<span class="recall-word recall-hidden">●●●</span>';
+      }
+      return '<span class="recall-word">' + w.arabic + '</span>';
+    }).join(' ');
+
+    document.getElementById('recallHint').textContent = 'Translation: “' + ayah.translation + '”';
+    document.getElementById('recallStatus').textContent = '';
+    document.getElementById('recallStatus').className = 'recall-status';
+    document.getElementById('recallPlayBtn').style.display = 'inline-flex';
+    document.getElementById('recallRevealBtn').style.display = 'none';
+    document.getElementById('recallAssessment').style.display = 'none';
+  }
+
+  function startRecallRound() {
+    document.getElementById('recallPlayBtn').style.display = 'none';
+
+    if (recallCurrentMode === 'beginning') {
+      document.getElementById('recallStatus').textContent = 'Your turn! Recall the beginning, then press Reveal';
+      document.getElementById('recallStatus').className = 'recall-status recall-status-waiting';
+      document.getElementById('recallRevealBtn').style.display = 'inline-flex';
+      return;
+    }
+
+    document.getElementById('recallStatus').textContent = 'Listening...';
+    document.getElementById('recallStatus').className = 'recall-status recall-status-playing';
+
+    stopAudio();
+    var ayahNum = recallAyahList[recallIdx];
+    currentAudio = new Audio(getAudioUrl(ayahNum));
+    currentAudio.playbackRate = parseFloat(document.getElementById('recallSpeed').value);
+
+    var pauseTriggered = false;
+    var pauseTime = null;
+    var ratio = recallPauseRatio;
+
+    currentAudio.addEventListener('loadedmetadata', function () {
+      pauseTime = currentAudio.duration * ratio;
+    });
+
+    currentAudio.addEventListener('timeupdate', function () {
+      if (!pauseTriggered && pauseTime !== null && currentAudio.currentTime >= pauseTime) {
+        pauseTriggered = true;
+        currentAudio.pause();
+        var msg = recallCurrentMode === 'ending'
+          ? 'Your turn! Recall the ending, then press Reveal'
+          : 'Your turn! Recall the middle, then press Reveal';
+        document.getElementById('recallStatus').textContent = msg;
+        document.getElementById('recallStatus').className = 'recall-status recall-status-waiting';
+        document.getElementById('recallRevealBtn').style.display = 'inline-flex';
+      }
+    });
+
+    currentAudio.play().catch(function () {
+      document.getElementById('recallStatus').textContent = 'Audio unavailable — recall from memory, then press Reveal';
+      document.getElementById('recallStatus').className = 'recall-status recall-status-waiting';
+      document.getElementById('recallRevealBtn').style.display = 'inline-flex';
+    });
+  }
+
+  function revealRecall() {
+    document.getElementById('recallRevealBtn').style.display = 'none';
+
+    var ayahNum = recallAyahList[recallIdx];
+    var ayah = ayahs[ayahNum - 1];
+    document.getElementById('recallArabic').innerHTML = ayah.words.map(function (w, i) {
+      var cls = (i >= recallHiddenStart && i <= recallHiddenEnd) ? 'recall-word recall-revealed' : 'recall-word';
+      return '<span class="' + cls + '">' + w.arabic + '</span>';
+    }).join(' ');
+
+    document.getElementById('recallStatus').textContent = 'Listen and verify...';
+    document.getElementById('recallStatus').className = 'recall-status recall-status-revealing';
+
+    function onAudioEnd() {
+      document.getElementById('recallStatus').textContent = 'How did you do?';
+      document.getElementById('recallStatus').className = 'recall-status';
+      document.getElementById('recallAssessment').style.display = 'block';
+    }
+
+    if (recallCurrentMode === 'beginning') {
+      stopAudio();
+      currentAudio = new Audio(getAudioUrl(ayahNum));
+      currentAudio.playbackRate = parseFloat(document.getElementById('recallSpeed').value);
+      currentAudio.addEventListener('ended', onAudioEnd);
+      currentAudio.addEventListener('error', onAudioEnd);
+      currentAudio.play().catch(onAudioEnd);
+    } else if (currentAudio) {
+      currentAudio.addEventListener('ended', onAudioEnd);
+      currentAudio.addEventListener('error', onAudioEnd);
+      currentAudio.play().catch(onAudioEnd);
+    } else {
+      onAudioEnd();
+    }
+  }
+
+  function rateRecall(gotIt) {
+    recallResults.push(gotIt);
+    stopAudio();
+    recallIdx++;
+    renderRecallProgress();
+    loadRecallAyah();
+  }
+
+  function renderRecallProgress() {
+    var container = document.getElementById('recallProgress');
+    if (!container) return;
+    container.innerHTML = '';
+    for (var i = 0; i < recallAyahList.length; i++) {
+      var dot = document.createElement('div');
+      dot.className = 'progress-dot';
+      if (i < recallResults.length) {
+        dot.classList.add(recallResults[i] ? 'correct' : 'incorrect');
+      } else if (i === recallIdx) {
+        dot.classList.add('current');
+      }
+      container.appendChild(dot);
+    }
+  }
+
   // ========== RESULTS OVERLAY ==========
   function showResults(title, percentage, message) {
     document.getElementById('resultsTitle').textContent = title;
@@ -806,6 +1024,7 @@
   initOrder();
   initIdentify();
   initBlanks();
+  initRecall();
   initVideos();
   updateProgressBadge();
 

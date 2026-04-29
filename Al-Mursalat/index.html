@@ -37,6 +37,7 @@
       <button class="nav-btn" data-mode="order">Order the Ayahs</button>
       <button class="nav-btn" data-mode="identify">Name That Ayah</button>
       <button class="nav-btn" data-mode="blanks">Fill in the Blanks</button>
+      <button class="nav-btn" data-mode="recall">Listen &amp; Recall</button>
       <button class="nav-btn" data-mode="videos">Video Resources</button>
     </div>
   </nav>
@@ -190,6 +191,64 @@
           <button class="btn btn-outline btn-sm" id="blanksResetBtn" style="margin-left: 8px">Reset</button>
         </div>
         <div class="identify-progress" id="blanksProgress"></div>
+      </div>
+    </section>
+
+    <!-- LISTEN & RECALL -->
+    <section id="mode-recall" class="mode-section">
+      <div class="section-header">
+        <h2>Listen &amp; Recall</h2>
+        <p>The reciter pauses mid-ayah — can you recall the missing portion?</p>
+      </div>
+      <div class="recall-mode-selector">
+        <button class="toggle-btn active" data-recall="beginning">Test Beginnings</button>
+        <button class="toggle-btn" data-recall="ending">Test Endings</button>
+        <button class="toggle-btn" data-recall="middle">Test Middles</button>
+        <button class="toggle-btn" data-recall="mix">Mix It Up</button>
+      </div>
+      <div class="recall-options">
+        <div class="recall-range">
+          <label>Range:</label>
+          <select id="recallRangeSelect">
+            <option value="1-10">Ayahs 1 – 10</option>
+            <option value="11-20">Ayahs 11 – 20</option>
+            <option value="21-30">Ayahs 21 – 30</option>
+            <option value="31-40">Ayahs 31 – 40</option>
+            <option value="41-50">Ayahs 41 – 50</option>
+            <option value="1-25">Ayahs 1 – 25</option>
+            <option value="26-50">Ayahs 26 – 50</option>
+            <option value="1-50" selected>All 50 Ayahs</option>
+          </select>
+        </div>
+        <div class="speed-control">
+          <label>Speed:</label>
+          <select id="recallSpeed">
+            <option value="0.5">0.5x</option>
+            <option value="0.75">0.75x</option>
+            <option value="1" selected>1x</option>
+          </select>
+        </div>
+        <button class="btn btn-sm btn-outline" id="recallRestartBtn">Restart</button>
+      </div>
+      <div class="card recall-card" id="recallCard">
+        <div class="recall-header">
+          <span class="recall-ayah-badge" id="recallAyahNum">1</span>
+          <span class="recall-mode-label" id="recallModeLabel">Recall the beginning</span>
+        </div>
+        <div class="recall-arabic arabic" id="recallArabic"></div>
+        <div class="recall-hint" id="recallHint"></div>
+        <div class="recall-status" id="recallStatus"></div>
+        <div class="recall-actions">
+          <button class="btn btn-primary" id="recallPlayBtn">&#9654; Play</button>
+          <button class="btn btn-accent" id="recallRevealBtn" style="display:none">Reveal &amp; Verify</button>
+        </div>
+        <div class="recall-assessment" id="recallAssessment" style="display:none">
+          <div class="recall-assessment-btns">
+            <button class="btn recall-got-it" id="recallGotItBtn">Got It</button>
+            <button class="btn recall-missed" id="recallMissedBtn">Missed It</button>
+          </div>
+        </div>
+        <div class="identify-progress" id="recallProgress"></div>
       </div>
     </section>
 
