@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hifz Helper — Surah Al-Mursalat</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1B7A6E">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Hifz Helper">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="header-content">
+      <div class="app-title">
+        <h1>Hifz Helper</h1>
+        <span class="surah-arabic">سُورَة الْمُرْسَلَات</span>
+      </div>
+      <div class="header-right">
+        <div class="progress-badge" id="progressBadge">0 / 50 mastered</div>
+        <button class="settings-toggle" id="settingsToggle" title="Preferences">
+          <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.49.49 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.48.48 0 0 0-.48-.41h-3.84a.48.48 0 0 0-.48.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96a.49.49 0 0 0-.59.22L2.74 8.87a.48.48 0 0 0 .12.61l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.26.41.48.41h3.84c.24 0 .44-.17.48-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6A3.6 3.6 0 1 1 12 8.4a3.6 3.6 0 0 1 0 7.2z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="mode-nav">
+    <div class="nav-inner">
+      <button class="nav-btn active" data-mode="listen">Listen &amp; Follow</button>
+      <button class="nav-btn" data-mode="associate">Word Association</button>
+      <button class="nav-btn" data-mode="order">Order the Ayahs</button>
+      <button class="nav-btn" data-mode="identify">Name That Ayah</button>
+      <button class="nav-btn" data-mode="blanks">Fill in the Blanks</button>
+      <button class="nav-btn" data-mode="videos">Video Resources</button>
+    </div>
+  </nav>
+
+  <main class="main-content">
+
+    <!-- LISTEN & FOLLOW -->
+    <section id="mode-listen" class="mode-section active">
+      <div class="section-header">
+        <h2>Listen &amp; Follow</h2>
+        <p>Play each ayah, follow the Arabic text, and learn the translation</p>
+      </div>
+      <div class="listen-controls">
+        <button class="btn btn-primary play-all-btn" id="playAllBtn">&#9654; Play All</button>
+        <button class="btn btn-outline btn-sm" id="stopBtn">&#9632; Stop</button>
+        <div class="speed-control">
+          <label>Speed:</label>
+          <select id="playbackSpeed">
+            <option value="0.5">0.5x</option>
+            <option value="0.75">0.75x</option>
+            <option value="1" selected>1x</option>
+          </select>
+        </div>
+      </div>
+      <div class="ayah-list" id="listenAyahList"></div>
+    </section>
+
+    <!-- WORD ASSOCIATION -->
+    <section id="mode-associate" class="mode-section">
+      <div class="section-header">
+        <h2>Word Association</h2>
+        <p>Click Arabic or English words to see their connection. Add your own memory notes.</p>
+      </div>
+      <div class="assoc-ayah-selector">
+        <label>Ayah:</label>
+        <select id="assocAyahSelect"></select>
+        <button class="btn btn-sm btn-ghost" id="assocPrev">&larr; Prev</button>
+        <button class="btn btn-sm btn-ghost" id="assocNext">Next &rarr;</button>
+      </div>
+      <div class="assoc-container">
+        <div class="card assoc-panel">
+          <h3>Arabic</h3>
+          <div class="assoc-arabic-text arabic" id="assocArabic"></div>
+        </div>
+        <div class="card assoc-panel">
+          <h3>English Translation</h3>
+          <div class="assoc-english-text" id="assocEnglish"></div>
+        </div>
+      </div>
+      <div class="card note-section" style="margin-top: 20px">
+        <h3>Your Memory Note for this Ayah</h3>
+        <textarea class="note-input" id="noteInput" placeholder="Write an association to help you remember this ayah..."></textarea>
+        <div class="note-save-status" id="noteSaveStatus">Saved</div>
+      </div>
+    </section>
+
+    <!-- ORDER THE AYAHS -->
+    <section id="mode-order" class="mode-section">
+      <div class="section-header">
+        <h2>Order the Ayahs</h2>
+        <p>Drag the ayahs into the correct order</p>
+      </div>
+      <div class="game-controls">
+        <div class="order-range-selector">
+          <label>Range:</label>
+          <select id="orderRangeSelect">
+            <option value="1-10">Ayahs 1 – 10</option>
+            <option value="11-20">Ayahs 11 – 20</option>
+            <option value="21-30">Ayahs 21 – 30</option>
+            <option value="31-40">Ayahs 31 – 40</option>
+            <option value="41-50">Ayahs 41 – 50</option>
+            <option value="1-25">Ayahs 1 – 25</option>
+            <option value="26-50">Ayahs 26 – 50</option>
+            <option value="1-50">All 50 Ayahs</option>
+          </select>
+          <button class="btn btn-sm btn-primary" id="orderShuffleBtn">Shuffle</button>
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-sm btn-accent" id="orderCheckBtn">Check Order</button>
+        </div>
+      </div>
+      <div class="game-stats" id="orderStats" style="display:none; margin-bottom: 16px">
+        <div class="stat">
+          <div class="stat-value" id="orderCorrectCount">0</div>
+          <div class="stat-label">Correct</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value" id="orderTotalCount">0</div>
+          <div class="stat-label">Total</div>
+        </div>
+      </div>
+      <div class="sortable-list" id="sortableList"></div>
+    </section>
+
+    <!-- NAME THAT AYAH -->
+    <section id="mode-identify" class="mode-section">
+      <div class="section-header">
+        <h2>Name That Ayah</h2>
+        <p>Test your knowledge of ayah numbers and text</p>
+      </div>
+      <div class="identify-direction-toggle">
+        <button class="toggle-btn active" data-dir="arabic-to-number">Arabic &#8594; Number</button>
+        <button class="toggle-btn" data-dir="number-to-arabic">Number &#8594; Arabic</button>
+      </div>
+      <div class="card identify-card" id="identifyCard">
+        <!-- Arabic to Number mode -->
+        <div id="identifyArabicMode">
+          <div class="identify-arabic arabic" id="identifyArabicText"></div>
+          <div class="identify-input-row">
+            <label style="font-weight:600; color: var(--text-secondary)">Ayah #</label>
+            <input type="number" class="identify-input" id="identifyNumberInput" min="1" max="50" placeholder="?">
+            <button class="btn btn-primary btn-sm" id="identifySubmitBtn">Check</button>
+          </div>
+        </div>
+        <!-- Number to Arabic mode -->
+        <div id="identifyNumberMode" style="display:none">
+          <div style="font-size: 48px; font-weight: 700; color: var(--primary); margin: 20px 0">
+            Ayah #<span id="identifyShowNumber"></span>
+          </div>
+          <div class="choices-grid" id="identifyChoices"></div>
+        </div>
+        <div class="identify-feedback" id="identifyFeedback"></div>
+        <div style="margin-top: 20px">
+          <button class="btn btn-accent btn-sm" id="identifyNextBtn" style="display:none">Next Ayah</button>
+        </div>
+        <div class="identify-progress" id="identifyProgress"></div>
+      </div>
+      <div style="text-align:center; margin-top: 16px">
+        <button class="btn btn-outline btn-sm" id="identifyResetBtn">Reset Game</button>
+      </div>
+    </section>
+
+    <!-- FILL IN THE BLANKS -->
+    <section id="mode-blanks" class="mode-section">
+      <div class="section-header">
+        <h2>Fill in the Blanks</h2>
+        <p>Complete the ayah by selecting the missing words</p>
+      </div>
+      <div class="difficulty-selector">
+        <button class="toggle-btn active" data-diff="easy">Easy (1 blank)</button>
+        <button class="toggle-btn" data-diff="medium">Medium (2-3)</button>
+        <button class="toggle-btn" data-diff="hard">Hard (all words)</button>
+      </div>
+      <div class="card blanks-card" id="blanksCard">
+        <div class="blanks-arabic" id="blanksArabicText"></div>
+        <div class="blanks-translation-hint" id="blanksHint"></div>
+        <div class="blanks-word-bank" id="blanksWordBank"></div>
+        <div class="identify-feedback" id="blanksFeedback"></div>
+        <div style="margin-top: 16px">
+          <button class="btn btn-accent btn-sm" id="blanksNextBtn">Next Ayah</button>
+          <button class="btn btn-outline btn-sm" id="blanksResetBtn" style="margin-left: 8px">Reset</button>
+        </div>
+        <div class="identify-progress" id="blanksProgress"></div>
+      </div>
+    </section>
+
+    <!-- VIDEO RESOURCES -->
+    <section id="mode-videos" class="mode-section">
+      <div class="section-header">
+        <h2>Video Resources</h2>
+        <p>Curated videos explaining the significance and meaning behind Surah Al-Mursalat</p>
+      </div>
+
+      <div class="card quality-legend">
+        <h3>Quality Scoring Matrix</h3>
+        <p class="legend-desc">Each video is rated across 5 criteria on a scale of 1–5. Higher total = stronger recommendation.</p>
+        <div class="legend-items">
+          <div class="legend-item"><span class="legend-dot" style="background: var(--primary)"></span> <strong>Authority</strong> — Scholar reputation &amp; channel credibility</div>
+          <div class="legend-item"><span class="legend-dot" style="background: var(--accent)"></span> <strong>Relevance</strong> — How specifically it covers Al-Mursalat</div>
+          <div class="legend-item"><span class="legend-dot" style="background: var(--gold)"></span> <strong>Depth</strong> — Educational value &amp; insight quality</div>
+          <div class="legend-item"><span class="legend-dot" style="background: var(--success)"></span> <strong>Engagement</strong> — Views, likes &amp; community response</div>
+          <div class="legend-item"><span class="legend-dot" style="background: #8B5CF6"></span> <strong>Clarity</strong> — Accessibility for English-speaking learners</div>
+        </div>
+      </div>
+
+      <div class="video-grid" id="videoGrid"></div>
+    </section>
+
+  </main>
+
+  <!-- RESULTS OVERLAY -->
+  <div class="results-overlay" id="resultsOverlay">
+    <div class="results-card">
+      <h2 id="resultsTitle">Great Job!</h2>
+      <div class="results-score" id="resultsScore">0%</div>
+      <p id="resultsMessage"></p>
+      <button class="btn btn-primary" id="resultsCloseBtn">Continue</button>
+    </div>
+  </div>
+
+  <!-- SETTINGS DRAWER -->
+  <div class="settings-overlay" id="settingsOverlay"></div>
+  <aside class="settings-drawer" id="settingsDrawer">
+    <div class="drawer-header">
+      <h2>Preferences</h2>
+      <button class="drawer-close" id="drawerClose">&times;</button>
+    </div>
+    <div class="drawer-body">
+
+      <div class="setting-group">
+        <h3>Arabic Font Style</h3>
+        <div class="setting-options" id="fontOptions">
+          <label class="setting-option active" data-font="amiri">
+            <input type="radio" name="arabic-font" value="amiri" checked>
+            <div class="option-radio"></div>
+            <div class="option-label">
+              <div class="option-name">Amiri</div>
+              <div class="option-preview">Classic printed Naskh</div>
+              <div class="option-preview-arabic" style="font-family:'Amiri',serif">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+            </div>
+          </label>
+          <label class="setting-option" data-font="scheherazade">
+            <input type="radio" name="arabic-font" value="scheherazade">
+            <div class="option-radio"></div>
+            <div class="option-label">
+              <div class="option-name">Scheherazade New</div>
+              <div class="option-preview">Traditional Naskh</div>
+              <div class="option-preview-arabic" style="font-family:'Scheherazade New',serif">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+            </div>
+          </label>
+          <label class="setting-option" data-font="noto-naskh">
+            <input type="radio" name="arabic-font" value="noto-naskh">
+            <div class="option-radio"></div>
+            <div class="option-label">
+              <div class="option-name">Noto Naskh Arabic</div>
+              <div class="option-preview">Clean &amp; modern Naskh</div>
+              <div class="option-preview-arabic" style="font-family:'Noto Naskh Arabic',serif">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+            </div>
+          </label>
+          <label class="setting-option" data-font="lateef">
+            <input type="radio" name="arabic-font" value="lateef">
+            <div class="option-radio"></div>
+            <div class="option-label">
+              <div class="option-name">Lateef</div>
+              <div class="option-preview">Nastaliq style</div>
+              <div class="option-preview-arabic" style="font-family:'Lateef',serif">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+            </div>
+          </label>
+          <label class="setting-option" data-font="noto-kufi">
+            <input type="radio" name="arabic-font" value="noto-kufi">
+            <div class="option-radio"></div>
+            <div class="option-label">
+              <div class="option-name">Noto Kufi Arabic</div>
+              <div class="option-preview">Kufi geometric style</div>
+              <div class="option-preview-arabic" style="font-family:'Noto Kufi Arabic',sans-serif">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <div class="setting-group">
+        <h3>Reciter</h3>
+        <div class="setting-options" id="reciterOptions">
+          <label class="setting-option active" data-reciter="Alafasy_128kbps">
+            <input type="radio" name="reciter" value="Alafasy_128kbps" checked>
+            <div class="option-radio"></div>
+            <div class="option-label">
+              <div class="option-name">Mishary Rashid Alafasy</div>
+              <div class="option-preview">Popular melodic recitation</div>
+            </div>
+          </label>
+          <label class="setting-option" data-reciter="Sudais_128kbps">
+            <input type="radio" name="reciter" value="Sudais_128kbps">
+            <div class="option-radio"></div>
+            <div class="option-label">
+              <div class="option-name">Abdul Rahman Al-Sudais</div>
+              <div class="option-preview">Imam of Masjid al-Haram</div>
+            </div>
+          </label>
+          <label class="setting-option" data-reciter="Abdul_Basit_Murattal_192kbps">
+            <input type="radio" name="reciter" value="Abdul_Basit_Murattal_192kbps">
+            <div class="option-radio"></div>
+            <div class="option-label">
+              <div class="option-name">Abdul Basit Abdul Samad</div>
+              <div class="option-preview">Legendary Egyptian reciter (Murattal)</div>
+            </div>
+          </label>
+          <label class="setting-option" data-reciter="Husary_128kbps">
+            <input type="radio" name="reciter" value="Husary_128kbps">
+            <div class="option-radio"></div>
+            <div class="option-label">
+              <div class="option-name">Mahmoud Khalil Al-Husary</div>
+              <div class="option-preview">Precise tajweed, ideal for learning</div>
+            </div>
+          </label>
+          <label class="setting-option" data-reciter="Maher_AlMuaiqly_128kbps">
+            <input type="radio" name="reciter" value="Maher_AlMuaiqly_128kbps">
+            <div class="option-radio"></div>
+            <div class="option-label">
+              <div class="option-name">Maher Al-Muaiqly</div>
+              <div class="option-preview">Imam of Masjid al-Haram</div>
+            </div>
+          </label>
+        </div>
+      </div>
+
+    </div>
+  </aside>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

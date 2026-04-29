@@ -1,0 +1,16 @@
+{
+  "name": "Hifz Helper — Al-Mursalat",
+  "short_name": "Hifz Helper",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#F7F8FA",
+  "theme_color": "#1B7A6E",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
