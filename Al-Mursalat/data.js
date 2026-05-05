@@ -114,10 +114,10 @@ const SURAH_DATA = {
     },
     {
       number: 12,
-      arabic: "لِأَيِّ يَوْمٍ أُجِّلَتْ",
+      arabic: "لِأَیِّ يَوْمٍ أُجِّلَتْ",
       translation: "For what Day was it postponed?",
       words: [
-        { arabic: "لِأَيِّ", english: "For what" },
+        { arabic: "لِأَیِّ", english: "For what" },
         { arabic: "يَوْمٍ", english: "Day" },
         { arabic: "أُجِّلَتْ", english: "was it postponed" }
       ]
@@ -145,12 +145,12 @@ const SURAH_DATA = {
     },
     {
       number: 15,
-      arabic: "وَيْلٌ يَوْمَئِذٍ لِلْمُكَذِّبِينَ",
+      arabic: "وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
       translation: "Woe, that Day, to the deniers",
       words: [
         { arabic: "وَيْلٌ", english: "Woe" },
         { arabic: "يَوْمَئِذٍ", english: "that Day" },
-        { arabic: "لِلْمُكَذِّبِينَ", english: "to the deniers" }
+        { arabic: "لِّلْمُكَذِّبِينَ", english: "to the deniers" }
       ]
     },
     {
@@ -185,45 +185,45 @@ const SURAH_DATA = {
     },
     {
       number: 19,
-      arabic: "وَيْلٌ يَوْمَئِذٍ لِلْمُكَذِّبِينَ",
+      arabic: "وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
       translation: "Woe, that Day, to the deniers",
       words: [
         { arabic: "وَيْلٌ", english: "Woe" },
         { arabic: "يَوْمَئِذٍ", english: "that Day" },
-        { arabic: "لِلْمُكَذِّبِينَ", english: "to the deniers" }
+        { arabic: "لِّلْمُكَذِّبِينَ", english: "to the deniers" }
       ]
     },
     {
       number: 20,
-      arabic: "أَلَمْ نَخْلُقْكُمْ مِنْ مَاءٍ مَهِينٍ",
+      arabic: "أَلَمْ نَخْلُقْكُمْ مِّن مَّاءٍ مَّهِينٍ",
       translation: "Did We not create you from a liquid disdained?",
       words: [
         { arabic: "أَلَمْ", english: "Did not" },
         { arabic: "نَخْلُقْكُمْ", english: "We create you" },
-        { arabic: "مِنْ", english: "from" },
-        { arabic: "مَاءٍ", english: "a liquid" },
-        { arabic: "مَهِينٍ", english: "disdained" }
+        { arabic: "مِّن", english: "from" },
+        { arabic: "مَّاءٍ", english: "a liquid" },
+        { arabic: "مَّهِينٍ", english: "disdained" }
       ]
     },
     {
       number: 21,
-      arabic: "فَجَعَلْنَاهُ فِي قَرَارٍ مَكِينٍ",
+      arabic: "فَجَعَلْنَاهُ فِی قَرَارٍ مَّكِينٍ",
       translation: "And We placed it in a firm lodging",
       words: [
         { arabic: "فَجَعَلْنَاهُ", english: "And We placed it" },
-        { arabic: "فِي", english: "in" },
+        { arabic: "فِی", english: "in" },
         { arabic: "قَرَارٍ", english: "a lodging" },
-        { arabic: "مَكِينٍ", english: "firm" }
+        { arabic: "مَّكِينٍ", english: "firm" }
       ]
     },
     {
       number: 22,
-      arabic: "إِلَىٰ قَدَرٍ مَعْلُومٍ",
+      arabic: "إِلَیٰ قَدَرٍ مَّعْلُومٍ",
       translation: "For a known extent",
       words: [
-        { arabic: "إِلَىٰ", english: "For" },
+        { arabic: "إِلَیٰ", english: "For" },
         { arabic: "قَدَرٍ", english: "an extent" },
-        { arabic: "مَعْلُومٍ", english: "known" }
+        { arabic: "مَّعْلُومٍ", english: "known" }
       ]
     },
     {
@@ -238,12 +238,12 @@ const SURAH_DATA = {
     },
     {
       number: 24,
-      arabic: "وَيْلٌ يَوْمَئِذٍ لِلْمُكَذِّبِينَ",
+      arabic: "وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
       translation: "Woe, that Day, to the deniers",
       words: [
         { arabic: "وَيْلٌ", english: "Woe" },
         { arabic: "يَوْمَئِذٍ", english: "that Day" },
-        { arabic: "لِلْمُكَذِّبِينَ", english: "to the deniers" }
+        { arabic: "لِّلْمُكَذِّبِينَ", english: "to the deniers" }
       ]
     },
     {
@@ -268,35 +268,35 @@ const SURAH_DATA = {
     },
     {
       number: 27,
-      arabic: "وَجَعَلْنَا فِيهَا رَوَاسِيَ شَامِخَاتٍ وَأَسْقَيْنَاكُمْ مَاءً فُرَاتًا",
+      arabic: "وَجَعَلْنَا فِيهَا رَوَاسِیَ شَامِخَاتٍ وَأَسْقَيْنَاكُمْ مَّاءً فُرَاتًا",
       translation: "And We placed therein lofty, firmly set mountains and have given you to drink sweet water",
       words: [
         { arabic: "وَجَعَلْنَا", english: "And We placed" },
         { arabic: "فِيهَا", english: "therein" },
-        { arabic: "رَوَاسِيَ", english: "mountains" },
+        { arabic: "رَوَاسِیَ", english: "mountains" },
         { arabic: "شَامِخَاتٍ", english: "lofty, firmly set" },
         { arabic: "وَأَسْقَيْنَاكُمْ", english: "and have given you to drink" },
-        { arabic: "مَاءً", english: "water" },
+        { arabic: "مَّاءً", english: "water" },
         { arabic: "فُرَاتًا", english: "sweet" }
       ]
     },
     {
       number: 28,
-      arabic: "وَيْلٌ يَوْمَئِذٍ لِلْمُكَذِّبِينَ",
+      arabic: "وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
       translation: "Woe, that Day, to the deniers",
       words: [
         { arabic: "وَيْلٌ", english: "Woe" },
         { arabic: "يَوْمَئِذٍ", english: "that Day" },
-        { arabic: "لِلْمُكَذِّبِينَ", english: "to the deniers" }
+        { arabic: "لِّلْمُكَذِّبِينَ", english: "to the deniers" }
       ]
     },
     {
       number: 29,
-      arabic: "انطَلِقُوا إِلَىٰ مَا كُنتُمْ بِهِ تُكَذِّبُونَ",
+      arabic: "انطَلِقُوا إِلَیٰ مَا كُنتُمْ بِهِ تُكَذِّبُونَ",
       translation: "Proceed to that which you used to deny",
       words: [
         { arabic: "انطَلِقُوا", english: "Proceed" },
-        { arabic: "إِلَىٰ", english: "to" },
+        { arabic: "إِلَیٰ", english: "to" },
         { arabic: "مَا", english: "that which" },
         { arabic: "كُنتُمْ", english: "you used to" },
         { arabic: "بِهِ", english: "it" },
@@ -305,37 +305,37 @@ const SURAH_DATA = {
     },
     {
       number: 30,
-      arabic: "انطَلِقُوا إِلَىٰ ظِلٍّ ذِي ثَلَاثِ شُعَبٍ",
+      arabic: "انطَلِقُوا إِلَیٰ ظِلٍّ ذِی ثَلَاثِ شُعَبٍ",
       translation: "Proceed to a shadow [of smoke] having three columns",
       words: [
         { arabic: "انطَلِقُوا", english: "Proceed" },
-        { arabic: "إِلَىٰ", english: "to" },
+        { arabic: "إِلَیٰ", english: "to" },
         { arabic: "ظِلٍّ", english: "a shadow" },
-        { arabic: "ذِي", english: "having" },
+        { arabic: "ذِی", english: "having" },
         { arabic: "ثَلَاثِ", english: "three" },
         { arabic: "شُعَبٍ", english: "columns" }
       ]
     },
     {
       number: 31,
-      arabic: "لَّا ظَلِيلٍ وَلَا يُغْنِي مِنَ اللَّهَبِ",
+      arabic: "لَّا ظَلِيلٍ وَلَا يُغْنِی مِنَ اللَّهَبِ",
       translation: "[But having] no cool shade and availing not against the flame",
       words: [
         { arabic: "لَّا", english: "No" },
         { arabic: "ظَلِيلٍ", english: "cool shade" },
         { arabic: "وَلَا", english: "and not" },
-        { arabic: "يُغْنِي", english: "availing" },
+        { arabic: "يُغْنِی", english: "availing" },
         { arabic: "مِنَ", english: "against" },
         { arabic: "اللَّهَبِ", english: "the flame" }
       ]
     },
     {
       number: 32,
-      arabic: "إِنَّهَا تَرْمِي بِشَرَرٍ كَالْقَصْرِ",
+      arabic: "إِنَّهَا تَرْمِی بِشَرَرٍ كَالْقَصْرِ",
       translation: "Indeed, it throws sparks [as huge] as a fortress",
       words: [
         { arabic: "إِنَّهَا", english: "Indeed, it" },
-        { arabic: "تَرْمِي", english: "throws" },
+        { arabic: "تَرْمِی", english: "throws" },
         { arabic: "بِشَرَرٍ", english: "sparks" },
         { arabic: "كَالْقَصْرِ", english: "as huge as a fortress" }
       ]
@@ -352,12 +352,12 @@ const SURAH_DATA = {
     },
     {
       number: 34,
-      arabic: "وَيْلٌ يَوْمَئِذٍ لِلْمُكَذِّبِينَ",
+      arabic: "وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
       translation: "Woe, that Day, to the deniers",
       words: [
         { arabic: "وَيْلٌ", english: "Woe" },
         { arabic: "يَوْمَئِذٍ", english: "that Day" },
-        { arabic: "لِلْمُكَذِّبِينَ", english: "to the deniers" }
+        { arabic: "لِّلْمُكَذِّبِينَ", english: "to the deniers" }
       ]
     },
     {
@@ -384,12 +384,12 @@ const SURAH_DATA = {
     },
     {
       number: 37,
-      arabic: "وَيْلٌ يَوْمَئِذٍ لِلْمُكَذِّبِينَ",
+      arabic: "وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
       translation: "Woe, that Day, to the deniers",
       words: [
         { arabic: "وَيْلٌ", english: "Woe" },
         { arabic: "يَوْمَئِذٍ", english: "that Day" },
-        { arabic: "لِلْمُكَذِّبِينَ", english: "to the deniers" }
+        { arabic: "لِّلْمُكَذِّبِينَ", english: "to the deniers" }
       ]
     },
     {
@@ -418,22 +418,22 @@ const SURAH_DATA = {
     },
     {
       number: 40,
-      arabic: "وَيْلٌ يَوْمَئِذٍ لِلْمُكَذِّبِينَ",
+      arabic: "وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
       translation: "Woe, that Day, to the deniers",
       words: [
         { arabic: "وَيْلٌ", english: "Woe" },
         { arabic: "يَوْمَئِذٍ", english: "that Day" },
-        { arabic: "لِلْمُكَذِّبِينَ", english: "to the deniers" }
+        { arabic: "لِّلْمُكَذِّبِينَ", english: "to the deniers" }
       ]
     },
     {
       number: 41,
-      arabic: "إِنَّ الْمُتَّقِينَ فِي ظِلَالٍ وَعُيُونٍ",
+      arabic: "إِنَّ الْمُتَّقِينَ فِی ظِلَالٍ وَعُيُونٍ",
       translation: "Indeed, the righteous will be among shades and springs",
       words: [
         { arabic: "إِنَّ", english: "Indeed" },
         { arabic: "الْمُتَّقِينَ", english: "the righteous" },
-        { arabic: "فِي", english: "will be among" },
+        { arabic: "فِی", english: "will be among" },
         { arabic: "ظِلَالٍ", english: "shades" },
         { arabic: "وَعُيُونٍ", english: "and springs" }
       ]
@@ -463,45 +463,45 @@ const SURAH_DATA = {
     },
     {
       number: 44,
-      arabic: "إِنَّا كَذَٰلِكَ نَجْزِي الْمُحْسِنِينَ",
+      arabic: "إِنَّا كَذَٰلِكَ نَجْزِی الْمُحْسِنِينَ",
       translation: "Indeed, We thus reward the doers of good",
       words: [
         { arabic: "إِنَّا", english: "Indeed, We" },
         { arabic: "كَذَٰلِكَ", english: "thus" },
-        { arabic: "نَجْزِي", english: "reward" },
+        { arabic: "نَجْزِی", english: "reward" },
         { arabic: "الْمُحْسِنِينَ", english: "the doers of good" }
       ]
     },
     {
       number: 45,
-      arabic: "وَيْلٌ يَوْمَئِذٍ لِلْمُكَذِّبِينَ",
+      arabic: "وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
       translation: "Woe, that Day, to the deniers",
       words: [
         { arabic: "وَيْلٌ", english: "Woe" },
         { arabic: "يَوْمَئِذٍ", english: "that Day" },
-        { arabic: "لِلْمُكَذِّبِينَ", english: "to the deniers" }
+        { arabic: "لِّلْمُكَذِّبِينَ", english: "to the deniers" }
       ]
     },
     {
       number: 46,
-      arabic: "كُلُوا وَتَمَتَّعُوا قَلِيلًا إِنَّكُمْ مُجْرِمُونَ",
+      arabic: "كُلُوا وَتَمَتَّعُوا قَلِيلًا إِنَّكُمْ مُّجْرِمُونَ",
       translation: "[O disbelievers], eat and enjoy yourselves a little; indeed, you are criminals",
       words: [
         { arabic: "كُلُوا", english: "Eat" },
         { arabic: "وَتَمَتَّعُوا", english: "and enjoy yourselves" },
         { arabic: "قَلِيلًا", english: "a little" },
         { arabic: "إِنَّكُمْ", english: "indeed, you are" },
-        { arabic: "مُجْرِمُونَ", english: "criminals" }
+        { arabic: "مُّجْرِمُونَ", english: "criminals" }
       ]
     },
     {
       number: 47,
-      arabic: "وَيْلٌ يَوْمَئِذٍ لِلْمُكَذِّبِينَ",
+      arabic: "وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
       translation: "Woe, that Day, to the deniers",
       words: [
         { arabic: "وَيْلٌ", english: "Woe" },
         { arabic: "يَوْمَئِذٍ", english: "that Day" },
-        { arabic: "لِلْمُكَذِّبِينَ", english: "to the deniers" }
+        { arabic: "لِّلْمُكَذِّبِينَ", english: "to the deniers" }
       ]
     },
     {
@@ -519,20 +519,20 @@ const SURAH_DATA = {
     },
     {
       number: 49,
-      arabic: "وَيْلٌ يَوْمَئِذٍ لِلْمُكَذِّبِينَ",
+      arabic: "وَيْلٌ يَوْمَئِذٍ لِّلْمُكَذِّبِينَ",
       translation: "Woe, that Day, to the deniers",
       words: [
         { arabic: "وَيْلٌ", english: "Woe" },
         { arabic: "يَوْمَئِذٍ", english: "that Day" },
-        { arabic: "لِلْمُكَذِّبِينَ", english: "to the deniers" }
+        { arabic: "لِّلْمُكَذِّبِينَ", english: "to the deniers" }
       ]
     },
     {
       number: 50,
-      arabic: "فَبِأَيِّ حَدِيثٍ بَعْدَهُ يُؤْمِنُونَ",
+      arabic: "فَبِأَیِّ حَدِيثٍ بَعْدَهُ يُؤْمِنُونَ",
       translation: "Then in what statement after the Qur'an will they believe?",
       words: [
-        { arabic: "فَبِأَيِّ", english: "Then in what" },
+        { arabic: "فَبِأَیِّ", english: "Then in what" },
         { arabic: "حَدِيثٍ", english: "statement" },
         { arabic: "بَعْدَهُ", english: "after it" },
         { arabic: "يُؤْمِنُونَ", english: "will they believe" }
@@ -578,10 +578,11 @@ const SURAH_DATA = {
     },
     {
       id: "vqLej5MspKs",
-      title: "Quran Tafsir #28: Surah Mulk to Surah Mursalat",
+      playlist: "PLYO6Oz7uwCSiIvS8fBim58larO1tRs9uI",
+      title: "Quran Tafsir Series — Surah Mulk to Mursalat (Full Playlist)",
       channel: "Dr. Yasir Qadhi & Shaykh Sajjad Gul",
-      description: "Part of a comprehensive Quran tafsir series. Dr. Yasir Qadhi and Shaykh Sajjad Gul walk through the final surahs of Juz 29 including Al-Mursalat, discussing themes, context of revelation, and practical lessons. A different scholarly voice that adds depth beyond a single perspective.",
-      tags: ["Full Tafsir Series", "Scholarly Duo", "Juz 29 Context"],
+      description: "A comprehensive Quran tafsir playlist. The relevant episode covers Juz 29 surahs including Al-Mursalat, discussing themes, context of revelation, and practical lessons. Links to the full playlist so you can explore all 30 sessions.",
+      tags: ["Full Tafsir Series", "Scholarly Duo", "Playlist"],
       ayahsCovered: "1–50 (Full Surah)",
       scores: { authority: 5, relevance: 4, depth: 5, engagement: 4, clarity: 5 }
     }

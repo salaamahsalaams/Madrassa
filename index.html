@@ -1,11 +1,293 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=Al-Mursalat/">
-    <title>Madrassa — Hifz Helper</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Madrassa — Hifz Helper</title>
+  <meta name="theme-color" content="#1B7A6E">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Madrassa">
+  <link rel="icon" href="Al-Mursalat/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="Al-Mursalat/icon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;600;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --primary: #1B7A6E;
+      --primary-light: #E6F5F2;
+      --primary-dark: #145C53;
+      --accent: #E8734A;
+      --accent-light: #FDF0EB;
+      --bg: #F7F8FA;
+      --surface: #FFFFFF;
+      --text: #1A2332;
+      --text-secondary: #5A6B7D;
+      --text-light: #8896A6;
+      --border: #E1E8EF;
+      --gold: #D4A843;
+      --gold-light: #FBF5E6;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 2px 8px rgba(0,0,0,0.06);
+      --shadow-lg: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .page-header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+    }
+
+    .page-header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .page-header .subtitle {
+      font-size: 15px;
+      color: var(--text-secondary);
+    }
+
+    .page-header .arabic-title {
+      font-family: 'Scheherazade New', serif;
+      font-size: 32px;
+      color: var(--primary-dark);
+      direction: rtl;
+      margin-top: 8px;
+    }
+
+    .main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 32px 24px;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .surah-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .surah-card {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.25s;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .surah-card:hover {
+      border-color: var(--primary);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-2px);
+    }
+
+    .surah-card.coming-soon .surah-card-arrow {
+      display: flex;
+    }
+
+    .surah-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .surah-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      font-size: 18px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .surah-card.coming-soon .surah-number {
+      background: var(--text-light);
+    }
+
+    .surah-badge {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 4px 10px;
+      border-radius: 12px;
+    }
+
+    .badge-active {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .badge-soon {
+      background: var(--gold-light);
+      color: var(--gold);
+    }
+
+    .surah-arabic-name {
+      font-family: 'Scheherazade New', serif;
+      font-size: 30px;
+      direction: rtl;
+      text-align: right;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .surah-english-name {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .surah-meta {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .surah-card-arrow {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .surah-card:hover .surah-card-arrow {
+      background: var(--primary);
+    }
+
+    .surah-card-arrow svg {
+      width: 14px;
+      height: 14px;
+      fill: var(--primary);
+      transition: fill 0.2s;
+    }
+
+    .surah-card:hover .surah-card-arrow svg {
+      fill: white;
+    }
+
+    .surah-card.coming-soon .surah-card-arrow {
+      display: none;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 32px 24px;
+      color: var(--text-light);
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      .page-header h1 { font-size: 22px; }
+      .page-header .arabic-title { font-size: 26px; }
+      .surah-grid { grid-template-columns: 1fr; }
+      .main { padding: 20px 16px; }
+    }
+  </style>
 </head>
 <body>
-    <p>Redirecting to <a href="Al-Mursalat/">Hifz Helper</a>...</p>
+
+  <header class="page-header">
+    <h1>Madrassa</h1>
+    <p class="subtitle">Hifz Helper — Quran Memorization</p>
+    <div class="arabic-title">حِفْظ القُرْآن الكَرِيم</div>
+  </header>
+
+  <main class="main">
+    <div class="section-label">My Surahs</div>
+    <div class="surah-grid">
+
+      <a href="An-Nisa/index.html" class="surah-card">
+        <div class="surah-card-top">
+          <div class="surah-number">4</div>
+          <span class="surah-badge badge-active">Active</span>
+        </div>
+        <div class="surah-arabic-name">سُورَة النِّسَاء</div>
+        <div class="surah-english-name">An-Nisa</div>
+        <div class="surah-meta">The Women &middot; 176 Ayahs &middot; Medinan</div>
+        <div class="surah-card-arrow"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></div>
+      </a>
+
+      <a href="Al-Insan/index.html" class="surah-card">
+        <div class="surah-card-top">
+          <div class="surah-number">76</div>
+          <span class="surah-badge badge-active">Active</span>
+        </div>
+        <div class="surah-arabic-name">سُورَة الإِنسَان</div>
+        <div class="surah-english-name">Al-Insan</div>
+        <div class="surah-meta">The Human &middot; 31 Ayahs &middot; Medinan</div>
+        <div class="surah-card-arrow"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></div>
+      </a>
+
+      <a href="Al-Mursalat/index.html" class="surah-card">
+        <div class="surah-card-top">
+          <div class="surah-number">77</div>
+          <span class="surah-badge badge-active">Active</span>
+        </div>
+        <div class="surah-arabic-name">سُورَة الْمُرْسَلَات</div>
+        <div class="surah-english-name">Al-Mursalat</div>
+        <div class="surah-meta">Those Sent Forth &middot; 50 Ayahs &middot; Meccan</div>
+        <div class="surah-card-arrow"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></div>
+      </a>
+
+      <a href="An-Naba/index.html" class="surah-card">
+        <div class="surah-card-top">
+          <div class="surah-number">78</div>
+          <span class="surah-badge badge-active">Active</span>
+        </div>
+        <div class="surah-arabic-name">سُورَة النَّبَأ</div>
+        <div class="surah-english-name">An-Naba</div>
+        <div class="surah-meta">The Great News &middot; 40 Ayahs &middot; Meccan</div>
+        <div class="surah-card-arrow"><svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></div>
+      </a>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    Madrassa &middot; Hifz Helper
+  </footer>
+
 </body>
 </html>
